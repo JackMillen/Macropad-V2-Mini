@@ -4,6 +4,7 @@
 # Importing Libraries
 import time
 import board
+import math
 from rainbowio import colorwheel
 import neopixel
 import keypad
@@ -52,13 +53,91 @@ def rainbow_cycle(wait):
             break
         time.sleep(wait)
 
+# Rainbow Animation
+def rainbow_fade(wait):
+    for j in range(255):
+        rc_index = j
+        for i in range(num_pixels):
+            pixels[i] = colorwheel(rc_index & 255)
+        pixels.show()
+        keypad()
+        if cycle != 1:
+            break
+        time.sleep(wait)
+
+# Red Fade
+def red(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((value, 0, 0))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 2:
+            break
+
+# Green Fade
+def green(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((0, value, 0))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 3:
+            break
+
+# Blue Fade
+def blue(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((0, 0, value))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 4:
+            break
+
+# Yellow Fade
+def yellow(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((value, value, 0))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 5:
+            break
+
+# Purple Fade
+def purple(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((value, 0, value))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 6:
+            break
+
+# White Fade
+def white(wait, mult):
+    for i in range(360*mult):
+        keypad()
+        value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        pixels.fill((value, value, value))
+        pixels.show()
+        time.sleep(wait)
+        if cycle != 7:
+            break
+
 # Changes light modes
 global cycle
 cycle = 0
 def rgb_cycle():
     global cycle
     cycle += 1
-    if cycle == 6:
+    if cycle == 8 + 1:
         cycle = 0
 
 # Keypad Outputs
@@ -109,21 +188,19 @@ while True:
     if cycle == 0:
         rainbow_cycle(0.01)
     elif cycle == 1:
-        keypad()
-        pixels.fill((255, 0, 0))
-        pixels.show()
+        rainbow_fade(0.03)
     elif cycle == 2:
-        keypad()
-        pixels.fill((0, 255, 0))
-        pixels.show()
+        red(0.03, 25)
     elif cycle == 3:
-        keypad()
-        pixels.fill((0, 0, 255))
-        pixels.show()
+        green(0.03, 25)
     elif cycle == 4:
-        keypad()
-        pixels.fill((255, 255, 255))
-        pixels.show()
+        blue(0.03, 25)
+    elif cycle == 5:
+        yellow(0.03, 25)
+    elif cycle == 6:
+        purple(0.03, 25)
+    elif cycle == 7:
+        white(0.03, 25)
     else:
         keypad()
         pixels.fill((0, 0, 0))
