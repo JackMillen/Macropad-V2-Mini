@@ -14,5 +14,17 @@ A few years ago I made [This](https://github.com/JackMillen/Macropad), a rough U
 - It looks ugly
 - Not enough RGB
 - Handwiring sucks
-## Solution?
-Using a custom PCB, I can easily make a matrix of switches, while also integrating a strip of Neopixels into the rows. I can add pads on the bottom to solder a 
+## Features:
+- Integrated Neopixels
+- Single PCB
+- USB C
+- Uses Circuit Python
+- RGB Animations (Animation Choice persists during power-cycle)
+- Low Profile
+- Autohotkey Support
+- Typewriter Style Keycaps
+- Debug pin-headers which allow an external arduino to interface with the PCB for testing
+
+## Issues
+- I f***ed up the diode placement on the circuit, just use wire to bridge the contacts and live with the ghost keys
+- The RP2040 doesn't have an EEPROM so I need to boot the RP2040 in read-only mode to save the RGB state in flash
