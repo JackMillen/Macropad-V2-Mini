@@ -1,5 +1,4 @@
 # Macropad-V2-Mini
-![](/Pictures/Complete.jpg)
 ## What is this?
 A PCB-based small form-factor USB keypad with RGB lighting
 
