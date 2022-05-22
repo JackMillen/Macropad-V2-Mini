@@ -1,5 +1,5 @@
 # Macropad-V2-Mini
-![](Pictures/Complete.jpg)
+![](Pictures/Title.jpg)
 ## What is this?
 A PCB-based small form-factor USB keypad with RGB lighting. They keys send a key press (F13-F23) for autohotkey to listen too, then perform the macro.
 
