@@ -5,6 +5,8 @@
 import time
 import board
 import math
+import supervisor
+import microcontroller
 from rainbowio import colorwheel
 import neopixel
 import keypad
@@ -140,9 +142,18 @@ def rgb_cycle():
     if cycle == 8 + 1:
         cycle = 0
 
+#Counts time since power on
+def counter():
+    mins = 10
+    current = round(time.monotonic())
+    if current % (60*mins) == 0:
+        print("reset")
+        supervisor.reload()
+
 # Keypad Outputs
 def keypad():
     event = km.events.get()
+    counter()
     if event:
         if event == one:
             kbd.send(Keycode.F13)
@@ -205,3 +216,4 @@ while True:
         keypad()
         pixels.fill((0, 0, 0))
         pixels.show()
+
