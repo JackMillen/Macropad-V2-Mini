@@ -135,12 +135,26 @@ def white(wait, mult):
 
 # Changes light modes
 global cycle
-cycle = 0
+
+try:
+    modeFile = open("mode.txt","r")
+    cycle = int(modeFile.read())
+    modeFile.close()
+except:
+    print("Can't Read From file")
+    cycle = 0
+
 def rgb_cycle():
     global cycle
     cycle += 1
     if cycle == 8 + 1:
         cycle = 0
+    try:
+        modeFile = open("mode.txt","w")
+        modeFile.write(str(cycle))
+        modeFile.close()
+    except:
+        print("Can't Write to File")
 
 #Counts time since power on
 def counter():
