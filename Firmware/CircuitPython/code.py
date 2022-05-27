@@ -20,7 +20,10 @@ km = keypad.KeyMatrix(
     column_pins=(board.D3, board.D4, board.D5, board.D6),
     row_pins=(board.D2, board.D1, board.D0),
 )
-kbd = Keyboard(usb_hid.devices)
+try:
+    kbd = Keyboard(usb_hid.devices)
+except:
+    print()
 
 # Neopixel Pins
 pixel_pin = board.D7
@@ -156,56 +159,51 @@ def rgb_cycle():
     except:
         print("Can't Write to File")
 
-#Counts time since power on
-def counter():
-    mins = 10
-    current = round(time.monotonic())
-    if current % (60*mins) == 0:
-        print("reset")
-        supervisor.reload()
 
 # Keypad Outputs
 def keypad():
     event = km.events.get()
-    counter()
-    if event:
-        if event == one:
-            kbd.send(Keycode.F13)
-            print("Button Pressed: 1")
-        if event == two:
-            kbd.send(Keycode.F14)
-            print("Button Pressed: 2")
-        if event == three:
-            kbd.send(Keycode.F15)
-            print("Button Pressed: 3")
-        if event == four:
-            kbd.send(Keycode.F16)
-            print("Button Pressed: 4")
-        if event == five:
-            kbd.send(Keycode.F17)
-            print("Button Pressed: 5")
-        if event == six:
-            kbd.send(Keycode.F18)
-            print("Button Pressed: 6")
-        if event == seven:
-            kbd.send(Keycode.F19)
-            print("Button Pressed: 7")
-        if event == eight:
-            kbd.send(Keycode.F20)
-            print("Button Pressed: 8")
-        if event == nine:
-            print("Button Pressed: 9")
-            rgb_cycle()
-            print("RGB Mode: " + str(cycle))
-        if event == ten:
-            print("Button Pressed: 10")
-            kbd.send(Keycode.F21)
-        if event == eleven:
-            print("Button Pressed: 11")
-            kbd.send(Keycode.F22)
-        if event == twelve:
-            print("Button Pressed: 12")
-            kbd.send(Keycode.F23)
+    try:
+        if event:
+            if event == one:
+                kbd.send(Keycode.F13)
+                print("Button Pressed: 1")
+            if event == two:
+                kbd.send(Keycode.F14)
+                print("Button Pressed: 2")
+            if event == three:
+                kbd.send(Keycode.F15)
+                print("Button Pressed: 3")
+            if event == four:
+                kbd.send(Keycode.F16)
+                print("Button Pressed: 4")
+            if event == five:
+                kbd.send(Keycode.F17)
+                print("Button Pressed: 5")
+            if event == six:
+                kbd.send(Keycode.F18)
+                print("Button Pressed: 6")
+            if event == seven:
+                kbd.send(Keycode.F19)
+                print("Button Pressed: 7")
+            if event == eight:
+                kbd.send(Keycode.F20)
+                print("Button Pressed: 8")
+            if event == nine:
+                print("Button Pressed: 9")
+                rgb_cycle()
+                print("RGB Mode: " + str(cycle))
+            if event == ten:
+                print("Button Pressed: 10")
+                kbd.send(Keycode.F21)
+            if event == eleven:
+                print("Button Pressed: 11")
+                kbd.send(Keycode.F22)
+            if event == twelve:
+                print("Button Pressed: 12")
+                kbd.send(Keycode.F23)
+    except:
+        print()
 
 
 # Main Loop
@@ -230,4 +228,3 @@ while True:
         keypad()
         pixels.fill((0, 0, 0))
         pixels.show()
-
