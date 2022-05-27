@@ -11,7 +11,7 @@ A few years ago I made [this](https://github.com/JackMillen/Macropad), a rough U
 - Too fragile (The wiring is held together with poor soldering, recycled wire and pure spite)
 - The keys are misaligned due to sloppy 3D modelling
 - Most of the dials do nothing because I don't use midi devices
-- It uses USB Micro-B, not Type-C (which is superior in everway to lightning)
+- It uses USB Micro-B, not Type-C (which is superior in everyway to lightning)
 - It looks ugly
 - Not enough RGB
 - Handwiring sucks
