@@ -13,12 +13,11 @@ btn = DigitalInOut(board.D3)
 btn.direction = Direction.INPUT
 btn.pull = Pull.UP
 
-try:
-    if not btn.value or bypass == True:
-        print("Write Mode")
-        storage.remount("/", True)
-    else:
-        print("Read-Only Mode")
-        storage.remount("/", False)
-except:
-    print("Mount Failed")
+if not btn.value or bypass == True:
+    print("Write Mode")
+    storage.remount("/", True)
+else:
+    print("Read-Only Mode")
+    storage.remount("/", False)
+    storage.disable_usb_drive()
+

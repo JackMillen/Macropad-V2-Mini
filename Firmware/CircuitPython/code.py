@@ -22,8 +22,9 @@ km = keypad.KeyMatrix(
 )
 try:
     kbd = Keyboard(usb_hid.devices)
+    hidActive = True
 except:
-    print()
+    hidActive = False
 
 # Neopixel Pins
 pixel_pin = board.D7
@@ -130,6 +131,7 @@ def white(wait, mult):
     for i in range(360*mult):
         keypad()
         value = ((((255 * math.sin(i/mult))//2) + (255//2))*0.8)+51
+        #print(""+str(value)+"")
         pixels.fill((value, value, value))
         pixels.show()
         time.sleep(wait)
@@ -138,7 +140,8 @@ def white(wait, mult):
 
 # Changes light modes
 global cycle
-
+global cycle_change
+cycle_change = False
 try:
     modeFile = open("mode.txt","r")
     cycle = int(modeFile.read())
@@ -149,9 +152,13 @@ except:
 
 def rgb_cycle():
     global cycle
+    global cycle_change
+    cycle_change = True
     cycle += 1
     if cycle == 8 + 1:
         cycle = 0
+
+def write_cycle(cycle):
     try:
         modeFile = open("mode.txt","w")
         modeFile.write(str(cycle))
@@ -163,7 +170,7 @@ def rgb_cycle():
 # Keypad Outputs
 def keypad():
     event = km.events.get()
-    try:
+    if hidActive:
         if event:
             if event == one:
                 kbd.send(Keycode.F13)
@@ -202,8 +209,11 @@ def keypad():
             if event == twelve:
                 print("Button Pressed: 12")
                 kbd.send(Keycode.F23)
-    except:
-        print()
+    else:
+        if event == nine:
+            print("Button Pressed: 9")
+            rgb_cycle()
+            print("RGB Mode: " + str(cycle))
 
 
 # Main Loop
@@ -228,3 +238,7 @@ while True:
         keypad()
         pixels.fill((0, 0, 0))
         pixels.show()
+
+    if cycle_change:
+        cycle_change = False
+        write_cycle(cycle)
