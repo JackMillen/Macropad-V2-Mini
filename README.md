@@ -29,7 +29,7 @@ A few years ago I made [this](https://github.com/JackMillen/Macropad), a rough U
 ## Issues:
 - I f***ed up the diode placement on the circuit, just use wire to bridge the contacts and live with the ghost keys
 - The RP2040 doesn't have an EEPROM so I need to boot the RP2040 in read-only mode to save the RGB state in flash
-- Writing code is easy. Writing code for other people to use and understand is f***ing hard, so I din't do it. If you are going to make this project, you might want to write your own firmware.
+- Writing code is easy. Writing code for other people to use and understand is f***ing hard, so I didn't do it. If you are going to make this project, you might want to write your own firmware (But you are welcome to decode mine, GPL 3.0 an' all).
 
 ## Weird Notes:
-- By default the flash is in Read-Only mode so it can store animation states. To edit the code or put the drive in RW, hold button 1 (Top-Left) while plugging it in. The RGB state won't save until power cycled, but the flash is writable.
+- By default the flash is in Read-Only mode so it can store animation states. To access the USB mass storage, hold the top-left button on startup
